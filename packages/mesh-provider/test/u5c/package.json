@@ -1,7 +1,7 @@
 {
     "name": "u5c tester",
     "version": "0.1.0",
-    "description": "Send lovelace from one address to another",
+    "description": "Test u5c Endpoints",
     "main": "test.js",
     "type": "module",
     "scripts": {
