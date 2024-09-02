@@ -70,8 +70,8 @@ export class U5CProvider implements IFetcher, ISubmitter {
   }
 
   async fetchAddressUTxOs(address: string, asset?: string): Promise<UTxO[]> {
-    const addressA = Address.fromString(address);
-    const addressBytes = toBytes(addressA!.toBytes().toString())
+    const addressObj = Address.fromString(address);
+    const addressBytes = toBytes(addressObj!.toBytes().toString())
 
     let utxoSearchResult: Utxo[];
 
@@ -226,27 +226,26 @@ export class U5CProvider implements IFetcher, ISubmitter {
 
   private _rpcPParamsToCorePParams(rpcPParams: Cardano.PParams): Protocol {
     return {
-      epoch: 1, // Hard coded response
-      minFeeA: Number(rpcPParams.minFeeConstant), // Adjusted from 'minFeeConstant'
-      minFeeB: Number(rpcPParams.minFeeCoefficient), // Adjusted from 'minFeeCoefficient'
+      epoch: 1, 
+      minFeeA: Number(rpcPParams.minFeeConstant), 
+      minFeeB: Number(rpcPParams.minFeeCoefficient), 
       maxBlockSize: Number(rpcPParams.maxBlockBodySize),
       maxTxSize: Number(rpcPParams.maxTxSize),
       maxBlockHeaderSize: Number(rpcPParams.maxBlockHeaderSize),
-      keyDeposit: Number(rpcPParams.stakeKeyDeposit), // Assuming 'keyDeposit' maps to 'stakeKeyDeposit'
-      poolDeposit: Number(rpcPParams.poolDeposit),
-      decentralisation: Number(rpcPParams.poolInfluence?.numerator), // Assuming 'decentralisation' is mapped from 'poolInfluence'
+      keyDeposit: Number(rpcPParams.stakeKeyDeposit), 
+      decentralisation: Number(rpcPParams.poolInfluence?.numerator),
       minPoolCost: String(rpcPParams.minPoolCost),
-      priceMem: Number(rpcPParams.prices?.memory), // Adjusted from 'prices.memory'
-      priceStep: Number(rpcPParams.prices?.steps), // Adjusted from 'prices.steps'
-      maxTxExMem: String(rpcPParams.maxExecutionUnitsPerTransaction?.memory), // Adjusted from 'maxExecutionUnitsPerTransaction.memory'
-      maxTxExSteps: String(rpcPParams.maxExecutionUnitsPerTransaction?.steps), // Adjusted from 'maxExecutionUnitsPerTransaction.steps'
-      maxBlockExMem: String(rpcPParams.maxExecutionUnitsPerBlock?.memory), // Adjusted from 'maxExecutionUnitsPerBlock.memory'
-      maxBlockExSteps: String(rpcPParams.maxExecutionUnitsPerBlock?.steps), // Adjusted from 'maxExecutionUnitsPerBlock.steps'
+      priceMem: Number(rpcPParams.prices?.memory),
+      priceStep: Number(rpcPParams.prices?.steps), 
+      maxTxExMem: String(rpcPParams.maxExecutionUnitsPerTransaction?.memory), 
+      maxTxExSteps: String(rpcPParams.maxExecutionUnitsPerTransaction?.steps), 
+      maxBlockExMem: String(rpcPParams.maxExecutionUnitsPerBlock?.memory), 
+      maxBlockExSteps: String(rpcPParams.maxExecutionUnitsPerBlock?.steps),
       maxValSize: Number(rpcPParams.maxValueSize),
-      collateralPercent: Number(rpcPParams.collateralPercentage), // Adjusted from 'collateralPercentage'
+      collateralPercent: Number(rpcPParams.collateralPercentage), 
       maxCollateralInputs: Number(rpcPParams.maxCollateralInputs),
-      coinsPerUtxoSize: Number(rpcPParams.coinsPerUtxoByte), // Adjusted from 'coinsPerUtxoByte'
-      minFeeRefScriptCostPerByte: Number(rpcPParams.minFeeConstant), // Assuming a mapping for 'minFeeRefScriptCostPerByte'
+      coinsPerUtxoSize: Number(rpcPParams.coinsPerUtxoByte), 
+      minFeeRefScriptCostPerByte: Number(rpcPParams.minFeeConstant), 
     };
   }
 
