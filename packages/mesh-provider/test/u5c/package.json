@@ -1,0 +1,17 @@
+{
+    "name": "u5c tester",
+    "version": "0.1.0",
+    "description": "Test u5c Endpoints",
+    "main": "test.js",
+    "type": "module",
+    "scripts": {
+      "send": "tsx test.ts"
+    },
+    "dependencies": {
+      "@meshsdk/core": "^1.6.12",
+      "@meshsdk/common": "^1.6."
+    },
+    "devDependencies": {
+      "tsx": "^4.9.4"
+    }
+  }
